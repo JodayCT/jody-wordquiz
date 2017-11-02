@@ -13,6 +13,9 @@ import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 public class H2DataStore implements DataStore {
 
 	private static final String DB_DRIVER = "org.h2.Driver";
@@ -22,11 +25,13 @@ public class H2DataStore implements DataStore {
 	
 	private static final String ENTRY_TABLE = "WORDENTRIES";
 	private static final String RESULTS_TABLE = "QUIZRESULTS";
-	
 
 	private final String dbFile;
 
 	private Connection connection;
+	
+	private static final Logger logger = LoggerFactory.getLogger(H2DataStore.class);
+	
 	
 	public H2DataStore(String filename) {
 		dbFile = DB_CONNECTION_PREFIX + filename;
@@ -42,8 +47,15 @@ public class H2DataStore implements DataStore {
 				String tableName = rs.getString(3);
 				tableNames.add(tableName);
 			}
-			if(!tableNames.contains(ENTRY_TABLE)) createEntriesTable(c);
-			if(!tableNames.contains(RESULTS_TABLE)) createResultsTable(c);
+			if(!tableNames.contains(ENTRY_TABLE))
+				createEntriesTable(c);
+			else
+				logger.info("Already had table " + ENTRY_TABLE);
+			
+			if(!tableNames.contains(RESULTS_TABLE))
+				createResultsTable(c);
+			else
+				logger.info("Already had table " + RESULTS_TABLE);
 					
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -57,7 +69,7 @@ public class H2DataStore implements DataStore {
 		s.executeUpdate(createQuery);
 		s.close();
 		c.commit();
-		System.out.println("Created WORDENTRIES");
+		logger.info("Created WORDENTRIES");
 	}
 	
 	private void createResultsTable(Connection c) throws SQLException {
@@ -66,7 +78,7 @@ public class H2DataStore implements DataStore {
 		s.executeUpdate(createQuery);
 		s.close();
 		c.commit();
-		System.out.println("Created QUIZRESULTS");
+		logger.info("Created QUIZRESULTS");
 	}
 	
 	private List<DictionaryEntry> loadAllEntries(Connection c) throws SQLException {
