@@ -1,0 +1,45 @@
+<h1>Create Entry</h1>
+
+#if($feedback)
+	<p>$feedback</p>
+#end
+
+<!--  way to submit data on the world wide web -->
+<form action="/createEntry" method="post">  
+	<div>
+		<label>Word:</label>
+		<input type="text" name="word" value="$!defaultWord">
+	</div>
+	<div>
+		<label>Part of Speech</label>
+		<select name="partOfSpeech">
+			<option value="">Choose part of speech...</option>
+			#foreach( $part in $partsOfSpeech )
+				#if( $part == $defaultPartOfSpeech )
+					<option value="$part" selected="selected">$part</option>
+				#else
+					<option value="$part">$part</option>
+				#end		
+			#end
+			
+		<!-- 
+			<option value="noun">noun</option>
+			<option value="verb">verb</option>
+			<option value="adjective">adjective</option>			
+			<option value="adverb">adverb</option>
+		-->
+		</select>
+	</div>
+	<div>
+		<label>Definition:</label>
+		<input type="text" name="definition" value="$!defaultDefinition">
+	</div>
+	<div>
+		#if( $showOverride )
+			<button name="submitType" value="override">Update With New Information</button>
+			<a href="createEntry">Keep Old Entry</a> 
+		#else
+			<button name="submitType" value="normal">Submit</button>
+		#end
+	</div>
+</form>

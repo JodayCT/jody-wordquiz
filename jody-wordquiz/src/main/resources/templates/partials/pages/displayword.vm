@@ -1,0 +1,2 @@
+<p>$entry.Word ($entry.PartOfSpeech): $entry.Definition</p>
+

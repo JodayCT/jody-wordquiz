@@ -1,0 +1,2 @@
+#set($pageContent = "templates/partials/pages/createentry.vm")
+#parse("templates/partials/common/page.vm")

@@ -1,0 +1,11 @@
+<h1>Word Test</h1>
+<p>$entry.Word ($entry.PartOfSpeech)</p>
+<button id="show-definition-button">Show Definition</button>
+<div id="test-definition-section">
+	<p>$entry.Definition</p>
+	<form action="/testWord" method="post">  
+		<input type="hidden" name="entryId" value="$entry.Id">
+		<button name="result" value="success">Correct</button>
+		<button name="result" value="failure">Incorrect</button>
+	</form>
+</div>

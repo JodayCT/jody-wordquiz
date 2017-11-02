@@ -1,0 +1,10 @@
+<header>
+	<div>Word Quiz v0.1</div>
+	<ul>
+		<li><a href="/">Home</a></li>
+		<li><a href="/testWord">Test Word</a></li>
+		<li><a href="/createEntry">Create Entry</a></li>
+		<li><a href="/displayAll">Display All Words</a></li>
+
+	</ul>
+</header>
