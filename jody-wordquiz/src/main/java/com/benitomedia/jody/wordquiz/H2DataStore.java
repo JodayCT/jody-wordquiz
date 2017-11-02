@@ -32,7 +32,6 @@ public class H2DataStore implements DataStore {
 	
 	private static final Logger logger = LoggerFactory.getLogger(H2DataStore.class);
 	
-	
 	public H2DataStore(String filename) {
 		dbFile = DB_CONNECTION_PREFIX + filename;
 		setupDB();
