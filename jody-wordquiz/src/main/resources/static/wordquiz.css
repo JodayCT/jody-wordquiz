@@ -1,7 +1,98 @@
+/* Eric Meyer's Reset CSS v2.0 - http://cssreset.com */
+html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abbr,acronym,address,big,cite,code,del,dfn,em,img,ins,kbd,q,s,samp,small,strike,strong,sub,sup,tt,var,b,u,i,center,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td,article,aside,canvas,details,embed,figure,figcaption,footer,header,hgroup,menu,nav,output,ruby,section,summary,time,mark,audio,video
+{border:0;font-size:100%;font:inherit;vertical-align:baseline;margin:0;padding:0;-moz-box-sizing:border-box;box-sizing:border-box;}
+article,aside,details,figcaption,figure,footer,header,hgroup,menu,nav,section
+{display:block}
+body{line-height:1}
+ol,ul{list-style:none}
+blockquote,q{quotes:none}
+blockquote:before,blockquote:after,q:before,q:after{content:none}
+table{border-collapse:collapse;border-spacing:0}
+
 body {
-	background-color: #eef;
+	background-color: #f7e4b7;
+}
+
+.page-body {
+	position: relative;
+    padding: 100px 0 40px;
+    min-height: 100vh;
+	background-image: url('images/wordquizbackground.jpg');
+	background-repeat: no-repeat;
+	background-position: center 100px;
+	background-size: cover; 
+}
+
+.page-content {
+	position: relative;
+    margin: 60px auto;
+    max-width: 600px;
+    padding: 113px;
+    background-color: rgba(200,150,180,.5);
+}
+
+header {
+	position: relative;
+    z-index: 1;
+}
+
+#wqnamecontainer {
+	position: absolute;
+    top: 10px;
+    left: 10px;
+	font-family: serif;
+	font-size: 500%;
+	font-weight: 900;
+	letter-spacing: -2px;
+	line-height: 75%;
+	color: #800000;
+}
+
+#menucontainer {
+	position: absolute;
+    top: 60px;
+    width: 100%;
+}
+
+#menucontainer ul
+{
+margin: 0;
+padding: 0;
+list-style-type: none;
+text-align: center;
+}
+
+#menucontainer ul li { display: inline; }
+
+#menucontainer ul li a
+{
+
+text-decoration: none;
+padding: .2em 1em;
+font-family: sans-serif;
+font-size: 150%;
+font-weight: 600;
+color: #800000;
+background-color: #f7e4b7;
+}
+
+#menucontainer ul li a:hover
+{
+color: #ce0303;
+background-color: #f7e4b7;
 }
 
 #test-definition-section {
 	display: none;
+}
+
+.footer-container {
+	position: relative;
+}
+
+.footer-content {
+	 position: fixed;
+	 bottom: 10px;
+	 width: 100%;
+	 text-align: center;
 }

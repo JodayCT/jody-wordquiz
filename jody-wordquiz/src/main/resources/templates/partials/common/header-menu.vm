@@ -1,10 +1,16 @@
 <header>
-	<div>Word Quiz v0.1</div>
-	<ul>
-		<li><a href="/">Home</a></li>
-		<li><a href="/testWord">Test Word</a></li>
-		<li><a href="/createEntry">Create Entry</a></li>
-		<li><a href="/displayAll">Display All Words</a></li>
-
-	</ul>
+	<div id="wqnamecontainer">
+		<div>WORD</div>
+		<div>QUIZ</div>
+	</div>
+	
+	<div id="menucontainer">
+		<ul>
+			<li><a href="/">HOME</a></li>
+			<li><a href="/testWord">TEST WORD</a></li>
+			<li><a href="/createEntry">CREATE ENTRY</a></li>
+			<li><a href="/displayAll">DISPLAY ALL WORDS</a></li>
+		</ul>
+	</div>
+	
 </header>

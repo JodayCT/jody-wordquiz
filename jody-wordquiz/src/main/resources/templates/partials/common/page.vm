@@ -5,8 +5,14 @@
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 	<script src="wordquiz.js"></script>
 </head>
+
 <body>
 	#parse("templates/partials/common/header-menu.vm")
-	#parse($pageContent)
+	<div class="page-body">
+		<div class="page-content">
+			#parse($pageContent)
+		</div>
+	</div>
+	#parse("templates/partials/common/footer.vm")
 </body>
 </html>
