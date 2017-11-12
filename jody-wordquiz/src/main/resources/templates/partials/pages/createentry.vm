@@ -5,15 +5,15 @@
 #end
 
 <!--  way to submit data on the world wide web -->
-<form action="/createEntry" method="post">  
-	<div>
+<form action="/createEntry" method="post"> 
+	<div class="input-row word-row">
 		<label>Word:</label>
 		<input type="text" name="word" value="$!defaultWord">
 	</div>
-	<div>
-		<label>Part of Speech</label>
+	<div class="input-row partofspeech-row">
+		<label>Part of Speech:</label>
 		<select name="partOfSpeech">
-			<option value="">Choose part of speech...</option>
+			<option value="">Choose...</option>
 			#foreach( $part in $partsOfSpeech )
 				#if( $part == $defaultPartOfSpeech )
 					<option value="$part" selected="selected">$part</option>
@@ -30,11 +30,12 @@
 		-->
 		</select>
 	</div>
-	<div>
+	<div class="input-row definition-row">
 		<label>Definition:</label>
-		<input type="text" name="definition" value="$!defaultDefinition">
+		<!--<input type="text" name="definition" value="$!defaultDefinition"> -->
+		<textarea name="definition">$!defaultDefinition</textarea>
 	</div>
-	<div>
+	<div class="input-row button-row">
 		#if( $showOverride )
 			<button name="submitType" value="override">Update With New Information</button>
 			<a href="createEntry">Keep Old Entry</a> 

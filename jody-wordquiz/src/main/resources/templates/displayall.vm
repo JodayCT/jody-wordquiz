@@ -1,2 +1,3 @@
 #set($pageContent = "templates/partials/pages/displayall.vm")
+#set($bodyClass = "display-all-page")
 #parse("templates/partials/common/page.vm")

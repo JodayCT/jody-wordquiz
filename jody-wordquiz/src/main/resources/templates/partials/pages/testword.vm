@@ -1,11 +1,20 @@
+
 <h1>Word Test</h1>
-<p>$entry.Word ($entry.PartOfSpeech)</p>
-<button id="show-definition-button">Show Definition</button>
+<div id="test-word">
+	<p>$entry.Word ($entry.PartOfSpeech)</p>
+</div>
+<div class="input-row button-row">
+	<button id="show-definition-button">Show Definition</button>
+</div>
 <div id="test-definition-section">
-	<p>$entry.Definition</p>
-	<form action="/testWord" method="post">  
+	<div id="testword-definition">  
+		<p>$entry.Definition</p>
+	</div>
+	<form action="/testWord" method="post">		
 		<input type="hidden" name="entryId" value="$entry.Id">
-		<button name="result" value="success">Correct</button>
-		<button name="result" value="failure">Incorrect</button>
+		<div class="input-row button-row">
+			<button name="result" value="success">Correct</button>
+			<button name="result" value="failure">Incorrect</button>
+		</div>	
 	</form>
 </div>

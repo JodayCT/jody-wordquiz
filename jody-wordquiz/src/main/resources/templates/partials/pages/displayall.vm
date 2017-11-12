@@ -1,10 +1,19 @@
 <h1>Display All Words</h1>
-<table>
-#foreach( $entry in $entries )    
-	<tr>
-		<td>$entry.Word</td>
-		<td>$entry.PartOfSpeech</td>
-		<td>$entry.Definition</td>		
-	</tr>
-#end
-</table>
+<div class="table">
+	<table style="width:100%">
+		<tr>
+			<th>Word</th>
+			<th>Part of Speech</th>
+			<th>Definition</th>
+		</tr>	
+			
+		
+		#foreach( $entry in $entries )    
+			<tr>
+				<td>$entry.Word</td>
+				<td>$entry.PartOfSpeech</td>
+				<td>$entry.Definition</td>		
+			</tr>
+		#end
+	</table>
+</div>

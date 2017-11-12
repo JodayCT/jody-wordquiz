@@ -1,2 +1,7 @@
 <h1>Home Page</h1>
-<p>This is the Word Quiz program !!</p>
+
+<div id="homepage-welcome">
+	<p>Welcome to WordQuiz !</p>
+	<br>
+	<p>Choose what you would like to do from the menu above.</p>
+</div>

@@ -6,7 +6,7 @@
 	<script src="wordquiz.js"></script>
 </head>
 
-<body>
+<body class="$!bodyClass">
 	#parse("templates/partials/common/header-menu.vm")
 	<div class="page-body">
 		<div class="page-content">
