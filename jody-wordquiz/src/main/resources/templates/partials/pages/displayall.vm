@@ -1,6 +1,6 @@
 <h1>Display All Words</h1>
-<div class="table">
-	<table style="width:100%">
+<div class="table-holder">
+	<table>
 		<tr>
 			<th>Word</th>
 			<th>Part of Speech</th>

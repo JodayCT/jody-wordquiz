@@ -158,17 +158,21 @@ background-color: #f7e4b7;
 #test-definition-section {
 	display: none;
 }
-.table {
-	style="width=100%";
+
+.table-holder {
+	width: 100%;
+	font-size: 16pt;
 }
 
-.table tr {
-	font-size: 16pt;
+.table-holder table {
+	width: 100%;
+}
+
+.table-holder th {
 	font-weight: bold;
 }
 
-.table td {
-	font-weight: lighter;	
+.table-holder td {
 	padding: 3px 0;
 }
 
