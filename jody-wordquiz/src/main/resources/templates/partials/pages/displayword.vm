@@ -1,2 +1,2 @@
-<p>$entry.Word ($entry.PartOfSpeech): $entry.Definition</p>
+<p>$summary.Entry.Word ($summary.Entry.PartOfSpeech): $summary.Entry.Definition</p>
 

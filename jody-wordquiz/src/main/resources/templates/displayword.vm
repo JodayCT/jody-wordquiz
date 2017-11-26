@@ -1,0 +1,3 @@
+#set($pageContent = "templates/partials/pages/displayword.vm")
+#set($bodyClass = "display-word-page")
+#parse("templates/partials/common/page.vm")

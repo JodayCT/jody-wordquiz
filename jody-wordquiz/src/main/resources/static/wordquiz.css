@@ -48,8 +48,16 @@ h1 {
 	text-align: center;
 }
 
+th {
+	text-align: left;
+}
+
 td {
 	text-align: left;
+}
+
+.right-justify-class {
+	text-align: right;
 }
 
 header {
@@ -173,7 +181,7 @@ background-color: #f7e4b7;
 }
 
 .table-holder td {
-	padding: 3px 0;
+	padding: 3px 6px;
 }
 
 .footer-container {

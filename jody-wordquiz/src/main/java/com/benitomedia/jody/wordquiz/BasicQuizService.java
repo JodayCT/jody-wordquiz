@@ -1,5 +1,9 @@
 package com.benitomedia.jody.wordquiz;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -20,7 +24,6 @@ public class BasicQuizService implements QuizService {
 	@Override
 	public DictionaryEntry getWordToTest() {
 		List<DictionaryEntry> allEntries = dataStore.getAllEntries();
-		List<QuizResult> allQuizResults = dataStore.getAllQuizResults();
 		
 		if(allEntries == null || allEntries.isEmpty()) {
 			return null;
@@ -28,11 +31,14 @@ public class BasicQuizService implements QuizService {
 		
 		Map<Long, Long> mostRecentQuiz = new HashMap<>(); 
 		Map<Long, Long> mostRecentSuccess = new HashMap<>();
-					
+
+/*  Made into method: getPartitionedQuizResults
 		Map<Long, List<QuizResult>> partitionedResults;
 		partitionedResults = allQuizResults.stream()
 				.sorted((a,b) -> b.getTimestamp().compareTo(a.getTimestamp()))  // in reverse order by timestamp
 				.collect(Collectors.groupingBy(qr -> qr.getEntryId()));
+*/
+		Map<Long, List<QuizResult>> partitionedResults = getPartitionedQuizResults();
 		
 		for(DictionaryEntry entry : allEntries) {
 			
@@ -48,7 +54,10 @@ public class BasicQuizService implements QuizService {
 			mostRecentQuiz.put(currentId, (currentIdQRList.get(0)).getTimestamp());
 						
 			mostRecentSuccess.put(currentId, findMostRecentSuccess(currentIdQRList));
-		}	
+		}
+		
+
+		
 /*		
 // FOR DEBUGGING
 		System.out.println("mostRecentQuiz");
@@ -107,6 +116,16 @@ public class BasicQuizService implements QuizService {
 		return 0;
 	}
 	
+	// List is grouped by entryId and within each group order by most recent timestamp first
+	public Map<Long, List<QuizResult>> getPartitionedQuizResults() {
+		List<QuizResult> allQuizResults = dataStore.getAllQuizResults();
+		Map<Long, List<QuizResult>> partitionedResults;
+		partitionedResults = allQuizResults.stream()
+				.sorted((a,b) -> b.getTimestamp().compareTo(a.getTimestamp()))  // in reverse order by timestamp
+				.collect(Collectors.groupingBy(qr -> qr.getEntryId()));
+		return partitionedResults;
+	}
+	
 	@Override
 	public DictionaryEntry createEntry(String word, String partOfSpeech, String definition, boolean overwrite) {
 		return dataStore.saveEntry(word, partOfSpeech, definition, overwrite);
@@ -130,5 +149,71 @@ public class BasicQuizService implements QuizService {
 	public DictionaryEntry getEntry(String word, String partOfSpeech) {
 		return dataStore.getEntry(word, partOfSpeech);
 	}
+
+	@Override
+	public List<EntrySummary> getAllSummaries() {
+		List<EntrySummary> sortedSummaries = new ArrayList<>();
+		List<DictionaryEntry> sortedEntries = getAllWords();
+		Map<Long, List<QuizResult>> partitionedResults = getPartitionedQuizResults();
+		for(DictionaryEntry entry: sortedEntries) {
+			List<QuizResult> currentIdQRList = partitionedResults.get(entry.getId());
+			sortedSummaries.add(createSummary(entry, currentIdQRList));	
+		}
+		return sortedSummaries;
+	}
 	
+	// I'm making an assumption that this list is ordered by reverse timestamp -- as we did above
+	public EntrySummary createSummary(DictionaryEntry entry, List<QuizResult> resultList) {
+		EntrySummary summary = new EntrySummary();
+		
+		if(resultList == null) {
+			resultList = new ArrayList<>();
+		}
+		
+		// all result numbers and percent will be 0 if word has not been tested
+		int successCount = 0;
+		int failureCount = 0;
+		for (QuizResult qr : resultList) {
+			if(qr.getResult().equals(WordQuizConstants.SUCCESS)) {
+				successCount++; 
+			} else if(qr.getResult().equals(WordQuizConstants.FAILURE)) {
+				failureCount++;
+			}
+		}
+		int total = successCount + failureCount;
+		float successPercent = 0;
+		String successPercentString = "0.0";
+		if(total > 0) {
+			successPercent = (float) successCount / total * 100;
+			successPercentString = String.format("%.1f", successPercent);
+		}
+		summary.setEntry(entry);
+		summary.setSuccessTotal(successCount);
+		summary.setFailureTotal(failureCount);
+		summary.setSuccessPercent(successPercent);
+		summary.setSuccessPercentString(successPercentString);
+		
+		if(!resultList.isEmpty()) {
+			Long mostRecentDate = resultList.get(0).getTimestamp();
+			summary.setMostRecentDate(mostRecentDate);
+			DateFormat outputFormat = new SimpleDateFormat("MMM dd yyyy");
+			Date d = new Date(mostRecentDate);
+			summary.setMostRecentDateString(outputFormat.format(d));
+		} else {
+			summary.setMostRecentDate(0L);
+			summary.setMostRecentDateString("");
+		}
+		
+		return summary;
+	}
+	
+	@Override
+	public EntrySummary getSummary(String word, String partOfSpeech) {
+		DictionaryEntry entry = dataStore.getEntry(word, partOfSpeech);
+		if(entry == null)
+			return null;
+		Map<Long, List<QuizResult>> partitionedResults = getPartitionedQuizResults();
+		List<QuizResult> currentIdQRList = partitionedResults.get(entry.getId());
+		return createSummary(entry, currentIdQRList);
+	}
 }

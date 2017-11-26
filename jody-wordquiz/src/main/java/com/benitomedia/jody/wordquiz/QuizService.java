@@ -13,5 +13,9 @@ public interface QuizService {
 	List<DictionaryEntry> getAllWords();
 	
 	DictionaryEntry getEntry(String word, String partOfSpeech);
-
+	
+	List<EntrySummary> getAllSummaries();
+	
+	EntrySummary getSummary(String word, String partOfSpeech);
+	
 }

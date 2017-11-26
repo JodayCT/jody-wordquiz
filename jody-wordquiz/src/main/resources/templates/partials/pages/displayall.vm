@@ -4,15 +4,22 @@
 		<tr>
 			<th>Word</th>
 			<th>Part of Speech</th>
-			<th>Definition</th>
+			<th>Successes</th>
+			<th>Failures</th>
+			<th>% Success</th>
+			<th>Last Date Tested</th>
 		</tr>	
-			
 		
-		#foreach( $entry in $entries )    
+		#foreach( $summary in $summaries )    
 			<tr>
-				<td>$entry.Word</td>
-				<td>$entry.PartOfSpeech</td>
-				<td>$entry.Definition</td>		
+				<td><a href="/displayWord/$summary.Entry.PartOfSpeech/$summary.Entry.Word">$summary.Entry.Word</a></td>
+				<td>$summary.Entry.PartOfSpeech</td>
+				<td>$summary.SuccessTotal</td>
+				<td>$summary.FailureTotal</td>
+				<td class="right-justify-class">
+					$summary.SuccessPercentString%
+				</td>	
+				<td>$summary.MostRecentDateString</td>		
 			</tr>
 		#end
 	</table>

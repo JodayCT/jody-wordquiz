@@ -104,11 +104,21 @@ public class WebController {
 		}, new VelocityTemplateEngine());
 
 		get("/displayAll", (req, res) -> {
-			List<DictionaryEntry> sortedEntries = quizService.getAllWords();
+			List<EntrySummary> sortedSummaries = quizService.getAllSummaries();
 			Map<String, Object> model = new HashMap<>();
 				
-			model.put("entries", sortedEntries);
+			model.put("summaries", sortedSummaries);
 			ModelAndView mav = new ModelAndView(model, "templates/displayall.vm");
+			return mav;
+		}, new VelocityTemplateEngine());
+		
+		get("/displayWord/:partOfSpeech/:word", (req, res) -> {
+			String word = req.params(":word");
+			String partOfSpeech = req.params(":partOfSpeech");
+			EntrySummary summary = quizService.getSummary(word, partOfSpeech);
+			Map<String, Object> model = new HashMap<>();
+			model.put("summary", summary);
+			ModelAndView mav = new ModelAndView(model, "templates/displayword.vm");
 			return mav;
 		}, new VelocityTemplateEngine());
 		
