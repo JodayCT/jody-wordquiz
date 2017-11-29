@@ -42,7 +42,8 @@ public class WebController {
 	
 	private void setupRoutes() {
 		
-		staticFileLocation("/static");
+		staticFiles.location("/static");
+		staticFiles.expireTime(60 * 60 * 24);
 		
 		get("/", (req, res) -> {
 			Map<String, Object> model = new HashMap<>();
