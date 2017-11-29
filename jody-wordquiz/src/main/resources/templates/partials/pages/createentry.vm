@@ -33,7 +33,7 @@
 	<div class="input-row definition-row">
 		<label>Definition:</label>
 		<!--<input type="text" name="definition" value="$!defaultDefinition"> -->
-		<textarea name="definition">$!defaultDefinition</textarea>
+		<textarea name="definition" class="definition-textarea">$!defaultDefinition</textarea>
 	</div>
 	<div class="input-row button-row">
 		#if( $showOverride )

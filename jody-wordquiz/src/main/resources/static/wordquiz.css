@@ -115,7 +115,6 @@ background-color: #f7e4b7;
 .input-row {
 	margin-bottom: 8px;
 	
-	
 }
 
 .input-row label {
@@ -137,6 +136,10 @@ background-color: #f7e4b7;
 
 .input-row textarea {
 	height: 80px;
+}
+
+.definition-textarea {
+	font-family: sans-serif;
 }
 
 .button-row {
@@ -195,7 +198,7 @@ background-color: #f7e4b7;
 }
 
 .footer-content {
-	 position: fixed;
+	 position: absolute;
 	 bottom: 10px;
 	 width: 100%;
 	 text-align: center;
