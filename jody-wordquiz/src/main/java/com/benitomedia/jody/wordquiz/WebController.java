@@ -14,15 +14,19 @@ import spark.template.velocity.VelocityTemplateEngine;
 public class WebController {
 	
 	public static void main (String[] args) {
-		//DataStore dataStore = new TestDataStore();
-		// DataStore dataStore = new H2DataStore("mem:test");
-		String dbFile = "C:\\Users\\Joday_000\\Desktop\\test.h2db";
+		int port = 4567;
+		if(args.length > 0) {
+			port = Integer.parseInt(args[0]);
+		}
+		String dbFile = "mem:test";
+		if(args.length > 1) {
+			dbFile = args[1];
+		}
+		// DataStore dataStore = new TestDataStore();
 		DataStore dataStore = new H2DataStore(dbFile);
 		QuizService quizService = new BasicQuizService(dataStore);
 		WebController controller = new WebController(quizService);
-		
-		// dataStore.saveEntry("fake word", "noun", "just for testing", false);
-		controller.start();
+		controller.start(port);
 	}
 	
 	private QuizService quizService;
@@ -31,7 +35,8 @@ public class WebController {
 		this.quizService = quizService;
 	}
 
-	public void start( ) {
+	public void start(int port) {
+		port(port);
 		setupRoutes();
 	}
 	
