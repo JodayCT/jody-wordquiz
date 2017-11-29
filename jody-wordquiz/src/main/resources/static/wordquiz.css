@@ -180,6 +180,12 @@ background-color: #f7e4b7;
 	font-weight: bold;
 }
 
+#display-word-part {
+	font-size: larger;
+	font-weight: bold;
+}
+
+
 .table-holder td {
 	padding: 3px 6px;
 }

@@ -1,2 +1,14 @@
-<p>$summary.Entry.Word ($summary.Entry.PartOfSpeech): $summary.Entry.Definition</p>
 
+<p id="display-word-part">$summary.Entry.Word ($summary.Entry.PartOfSpeech)</p>
+<p>&emsp; $summary.Entry.Definition</p>
+<br>
+<p>Successes: &ensp; $summary.SuccessTotal</p>
+<p>Failures: &ensp; $summary.FailureTotal</p>
+<p>% Success: &ensp; $summary.SuccessPercentString%</p>
+<br>
+<p>First Test: &ensp; $summary.FirstDateString</p>
+<p>Last Test: &ensp; $summary.MostRecentDateString</p>
+<p>Last Success: &ensp; $summary.MostRecentSuccessDateString</p>
+
+
+	

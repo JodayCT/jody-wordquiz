@@ -199,11 +199,34 @@ public class BasicQuizService implements QuizService {
 			DateFormat outputFormat = new SimpleDateFormat("MMM dd yyyy");
 			Date d = new Date(mostRecentDate);
 			summary.setMostRecentDateString(outputFormat.format(d));
+			
+			Long firstDate = resultList.get(resultList.size() - 1).getTimestamp();
+			summary.setFirstDate(firstDate);
+			d = new Date(firstDate);
+			summary.setFirstDateString(outputFormat.format(d));
+			
+			// Initialize in case there has been no success
+			summary.setMostRecentSuccessDate(0L);
+			summary.setMostRecentSuccessDateString("");
+
+			for(QuizResult qr : resultList) {
+				if(qr.getResult().equals(WordQuizConstants.SUCCESS)) {
+					summary.setMostRecentSuccessDate(qr.getTimestamp());
+					d = new Date(qr.getTimestamp());
+					summary.setMostRecentSuccessDateString(outputFormat.format(d));
+					break;
+				}	
+			}	
+			
 		} else {
 			summary.setMostRecentDate(0L);
 			summary.setMostRecentDateString("");
+			summary.setMostRecentSuccessDate(0L);
+			summary.setMostRecentSuccessDateString("");
+			summary.setFirstDate(0L);
+			summary.setFirstDateString("");
 		}
-		
+
 		return summary;
 	}
 	

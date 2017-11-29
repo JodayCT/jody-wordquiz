@@ -9,6 +9,10 @@ public class EntrySummary {
 	private String successPercentString;
 	private Long mostRecentDate;
 	private String mostRecentDateString;
+	private Long mostRecentSuccessDate;
+	private String mostRecentSuccessDateString;
+	private Long firstDate;
+	private String firstDateString;
 		
 	public DictionaryEntry getEntry() {
 		return entry;
@@ -51,5 +55,29 @@ public class EntrySummary {
 	}
 	public void setMostRecentDateString(String mostRecentDateString) {
 		this.mostRecentDateString = mostRecentDateString;
+	}
+	public Long getMostRecentSuccessDate() {
+		return mostRecentSuccessDate;
+	}
+	public void setMostRecentSuccessDate(Long mostRecentSuccessDate) {
+		this.mostRecentSuccessDate = mostRecentSuccessDate;
+	}
+	public String getMostRecentSuccessDateString() {
+		return mostRecentSuccessDateString;
+	}
+	public void setMostRecentSuccessDateString(String mostRecentSuccessDateString) {
+		this.mostRecentSuccessDateString = mostRecentSuccessDateString;
+	}
+	public Long getFirstDate() {
+		return firstDate;
+	}
+	public void setFirstDate(Long firstDate) {
+		this.firstDate = firstDate;
+	}
+	public String getFirstDateString() {
+		return firstDateString;
+	}
+	public void setFirstDateString(String firstDateString) {
+		this.firstDateString = firstDateString;
 	}
 }
