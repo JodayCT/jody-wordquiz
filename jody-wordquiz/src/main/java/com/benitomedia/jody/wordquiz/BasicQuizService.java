@@ -13,7 +13,7 @@ public class BasicQuizService implements QuizService {
 
 	private DataStore dataStore;
 	
-	private static final long ONE_DAY_MILLIS = 1000 * 60 * 60 * 24;
+	private static final long RECENT_THRESHOLD = 1000 * 60 * 60 * 12;   // 12 HOURS
 	
 	public BasicQuizService(DataStore dataStore) {	// constructor -- use to create a new dataStore
 		this.dataStore = dataStore;					// this.dataStore is the field that was defined up in the private statement
@@ -110,7 +110,7 @@ public class BasicQuizService implements QuizService {
 	// returns 1 if recent, 0 if not
 	private int isRecent(Long now, Long timestamp) { 
 		Long difference = now - timestamp;
-		if(difference < ONE_DAY_MILLIS ) {
+		if(difference < RECENT_THRESHOLD ) {
 			return 1;
 		}
 		return 0;
