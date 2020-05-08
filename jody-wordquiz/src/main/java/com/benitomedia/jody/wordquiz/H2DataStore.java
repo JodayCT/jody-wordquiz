@@ -209,9 +209,7 @@ public class H2DataStore implements DataStore {
 			entry.setWord(word);
 			entry.setPartOfSpeech(partOfSpeech);
 			entry.setDefinition(definition);
-			
-			System.out.println("Created entry: " + entry.toString());
-			
+						
 			return entry;
 	
 		} catch (SQLException e) {
@@ -242,9 +240,25 @@ public class H2DataStore implements DataStore {
 
 	@Override
 	public DictionaryEntry removeEntryAndResults(Long id) {
-		// TODO!!!
-		return null;
+		try(Connection c = getDBConnection()) {
+			String query = "DELETE FROM WORDENTRIES WHERE id=?";
+			PreparedStatement s = c.prepareStatement(query);
+			s.setLong(1,id);
+			s.executeUpdate();
+		
+			s.close();
+		
+		return null; 	
+			
+		
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		return null;	
 	}
+	
+	
 
 	@Override
 	public List<QuizResult> getAllQuizResults() {

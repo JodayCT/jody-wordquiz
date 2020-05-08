@@ -128,6 +128,18 @@ public class WebController {
 			return mav;
 		}, new VelocityTemplateEngine());
 		
+		// delete button is in displayword.vm with click function for confirm in wordquiz.js)
+		
+		post("/deleteWord", (req, res) -> {
+			String entryId = req.queryParams("entryId");
+			          
+            quizService.deleteEntry(Long.parseLong(entryId));
+      
+            res.redirect("/displayAll");
+            return "";
+        });
+
+		
 	}
 	
 	private ModelAndView createEntryModelAndView(String feedback, String defaultWord, String defaultPartOfSpeech, String defaultDefinition,

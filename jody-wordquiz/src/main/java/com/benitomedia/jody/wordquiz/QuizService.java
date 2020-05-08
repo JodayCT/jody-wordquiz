@@ -10,6 +10,8 @@ public interface QuizService {
 	
 	DictionaryEntry createEntry(String word, String partOfSpeech, String definiton, boolean overwrite);
 	
+	DictionaryEntry deleteEntry(long entryID);
+
 	List<DictionaryEntry> getAllWords();
 	
 	DictionaryEntry getEntry(String word, String partOfSpeech);
@@ -17,5 +19,6 @@ public interface QuizService {
 	List<EntrySummary> getAllSummaries();
 	
 	EntrySummary getSummary(String word, String partOfSpeech);
+
 	
 }

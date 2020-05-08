@@ -11,4 +11,16 @@
 <p>Last Success: &ensp; $summary.MostRecentSuccessDateString</p>
 
 
+<form action="/deleteWord" method="post"> 
+     <input type="hidden" name="entryId" value="$summary.Entry.Id">
+     
+   	<div class="input-row button-row">
+		<button id="delete-word-button">Delete Word</button>
+	</div>
+        
+</form>
+
+
+
+
 	

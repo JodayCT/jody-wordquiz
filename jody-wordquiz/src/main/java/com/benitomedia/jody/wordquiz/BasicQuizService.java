@@ -132,6 +132,11 @@ public class BasicQuizService implements QuizService {
 	}
 	
 	@Override
+	public DictionaryEntry deleteEntry(long entryId) {	
+		return dataStore.removeEntryAndResults(entryId);
+	}
+	
+	@Override
 	public void recordResult(long entryID, String resultString) {
 		dataStore.saveQuizResult(entryID, resultString);
 	}
