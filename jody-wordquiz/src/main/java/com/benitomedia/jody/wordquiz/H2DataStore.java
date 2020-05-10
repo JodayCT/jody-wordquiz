@@ -90,6 +90,7 @@ public class H2DataStore implements DataStore {
 	private List<QuizResult> loadAllQuizResults(Connection c) throws SQLException {
 		String query = "SELECT * FROM " + RESULTS_TABLE;
 		List<QuizResult> qrs = runQuery(c, query, rs -> parseQuizResults(rs));
+		
 		return qrs;
 	}
 	
@@ -113,11 +114,12 @@ public class H2DataStore implements DataStore {
 	
 	private List<QuizResult> parseQuizResults(ResultSet rs) throws SQLException {
 		List<QuizResult> results = new ArrayList<>();
+		
 		while (rs.next()) {
 			Long entryId = rs.getLong("entryid");
 			Long timestamp = rs.getLong("timestamp");
 			String result = rs.getString("result");
-
+			
 			QuizResult qr = new QuizResult();
 			qr.setEntryId(entryId);
 			qr.setTimestamp(timestamp);
@@ -186,8 +188,8 @@ public class H2DataStore implements DataStore {
 			} else {
 				return null;
 			}
-		}
-	}
+			}
+		} 
 	
 	private DictionaryEntry insertEntry(String word, String partOfSpeech, String definition) {
 		try(Connection c = getDBConnection()) {
@@ -241,12 +243,17 @@ public class H2DataStore implements DataStore {
 	@Override
 	public DictionaryEntry removeEntryAndResults(Long id) {
 		try(Connection c = getDBConnection()) {
-			String query = "DELETE FROM WORDENTRIES WHERE id=?";
-			PreparedStatement s = c.prepareStatement(query);
-			s.setLong(1,id);
-			s.executeUpdate();
-		
-			s.close();
+			String queryw = "DELETE FROM WORDENTRIES WHERE id=?";
+			PreparedStatement sw = c.prepareStatement(queryw);
+			sw.setLong(1,id);
+			sw.executeUpdate();
+			sw.close();
+			
+			String queryr = "DELETE FROM QUIZRESULTS WHERE entryid=?";
+			PreparedStatement sr = c.prepareStatement(queryr);
+			sr.setLong(1,id);
+			sr.executeUpdate();
+			sr.close();
 		
 		return null; 	
 			
